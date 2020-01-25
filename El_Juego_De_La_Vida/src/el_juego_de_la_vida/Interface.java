@@ -12,4 +12,7 @@ package el_juego_de_la_vida;
  */
 public class Interface {
     
+    public void createSim() {
+        
+    }
 }

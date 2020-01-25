@@ -18,46 +18,77 @@ public class El_Juego_De_La_Vida {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("$$$$$$$$\\ $$\\                $$$$$\\ $$\\   $$\\ $$$$$$$$\\  $$$$$$\\   $$$$$$\\  \n" +
-"$$  _____|$$ |               \\__$$ |$$ |  $$ |$$  _____|$$  __$$\\ $$  __$$\\ \n" +
-"$$ |      $$ |                  $$ |$$ |  $$ |$$ |      $$ /  \\__|$$ /  $$ |\n" +
-"$$$$$\\    $$ |                  $$ |$$ |  $$ |$$$$$\\    $$ |$$$$\\ $$ |  $$ |\n" +
-"$$  __|   $$ |            $$\\   $$ |$$ |  $$ |$$  __|   $$ |\\_$$ |$$ |  $$ |\n" +
-"$$ |      $$ |            $$ |  $$ |$$ |  $$ |$$ |      $$ |  $$ |$$ |  $$ |\n" +
-"$$$$$$$$\\ $$$$$$$$\\       \\$$$$$$  |\\$$$$$$  |$$$$$$$$\\ \\$$$$$$  | $$$$$$  |\n" +
-"$$$$$$$\\_|$$$$$$$$\\|      $$\\_____/  $$$$$$\\/ \\________| \\______/  \\______/ \n" +
-"$$  __$$\\ $$  _____|      $$ |      $$  __$$\\                               \n" +
-"$$ |  $$ |$$ |            $$ |      $$ /  $$ |                              \n" +
-"$$ |  $$ |$$$$$\\          $$ |      $$$$$$$$ |                              \n" +
-"$$ |  $$ |$$  __|         $$ |      $$  __$$ |                              \n" +
-"$$ |  $$ |$$ |            $$ |      $$ |  $$ |                              \n" +
-"$$$$$$$  |$$$$$$$$\\       $$$$$$$$\\ $$ |  $$ |                              \n" +
-"$$\\____$$\\\\$$$$$$\\_$$$$$$$\\___$$$$$$\\__|  \\__|                              \n" +
-"$$ |   $$ |\\_$$  _|$$  __$$\\ $$  __$$\\                                      \n" +
-"$$ |   $$ |  $$ |  $$ |  $$ |$$ /  $$ |                                     \n" +
-"\\$$\\  $$  |  $$ |  $$ |  $$ |$$$$$$$$ |                                     \n" +
-" \\$$\\$$  /   $$ |  $$ |  $$ |$$  __$$ |                                     \n" +
-"  \\$$$  /    $$ |  $$ |  $$ |$$ |  $$ |                                     \n" +
-"   \\$  /   $$$$$$\\ $$$$$$$  |$$ |  $$ |                                     \n" +
-"    \\_/    \\______|\\_______/ \\__|  \\__|                                     \n" +
-"                                        ");
-        
+        System.out.println("$$$$$$$$\\ $$\\                $$$$$\\ $$\\   $$\\ $$$$$$$$\\  $$$$$$\\   $$$$$$\\  \n"
+                + "$$  _____|$$ |               \\__$$ |$$ |  $$ |$$  _____|$$  __$$\\ $$  __$$\\ \n"
+                + "$$ |      $$ |                  $$ |$$ |  $$ |$$ |      $$ /  \\__|$$ /  $$ |\n"
+                + "$$$$$\\    $$ |                  $$ |$$ |  $$ |$$$$$\\    $$ |$$$$\\ $$ |  $$ |\n"
+                + "$$  __|   $$ |            $$\\   $$ |$$ |  $$ |$$  __|   $$ |\\_$$ |$$ |  $$ |\n"
+                + "$$ |      $$ |            $$ |  $$ |$$ |  $$ |$$ |      $$ |  $$ |$$ |  $$ |\n"
+                + "$$$$$$$$\\ $$$$$$$$\\       \\$$$$$$  |\\$$$$$$  |$$$$$$$$\\ \\$$$$$$  | $$$$$$  |\n"
+                + "$$$$$$$\\_|$$$$$$$$\\|      $$\\_____/  $$$$$$\\/ \\________| \\______/  \\______/ \n"
+                + "$$  __$$\\ $$  _____|      $$ |      $$  __$$\\                               \n"
+                + "$$ |  $$ |$$ |            $$ |      $$ /  $$ |                              \n"
+                + "$$ |  $$ |$$$$$\\          $$ |      $$$$$$$$ |                              \n"
+                + "$$ |  $$ |$$  __|         $$ |      $$  __$$ |                              \n"
+                + "$$ |  $$ |$$ |            $$ |      $$ |  $$ |                              \n"
+                + "$$$$$$$  |$$$$$$$$\\       $$$$$$$$\\ $$ |  $$ |                              \n"
+                + "$$\\____$$\\\\$$$$$$\\_$$$$$$$\\___$$$$$$\\__|  \\__|                              \n"
+                + "$$ |   $$ |\\_$$  _|$$  __$$\\ $$  __$$\\                                      \n"
+                + "$$ |   $$ |  $$ |  $$ |  $$ |$$ /  $$ |                                     \n"
+                + "\\$$\\  $$  |  $$ |  $$ |  $$ |$$$$$$$$ |                                     \n"
+                + " \\$$\\$$  /   $$ |  $$ |  $$ |$$  __$$ |                                     \n"
+                + "  \\$$$  /    $$ |  $$ |  $$ |$$ |  $$ |                                     \n"
+                + "   \\$  /   $$$$$$\\ $$$$$$$  |$$ |  $$ |                                     \n"
+                + "    \\_/    \\______|\\_______/ \\__|  \\__|                                     \n"
+                + "                                        ");
+
         System.out.println("Introduce un caracter para continuar o S para salir.");
         char option;
         do {
             String input = in.next().toUpperCase();
+            int width, height, numberAlive;
             option = input.charAt(0);
             switch (option) {
                 case 'S':
                     break;
                 default:
-                    Simulation partida = new Simulation();
-                    partida.play();
-                    System.out.println("");
-                    System.out.print("Para volver a jugar introduce un carácter cualquiera o S para salir: ");
+                    System.out.println("Introduce las dimensiones (si es 0 se asignará 20 por defecto):");
+                    
+                    do {
+                        System.out.print("Ancho: ");
+                        width = in.nextInt();
+                        
+                        if (width > 100) {
+                            System.out.println("Las dimensiones no pueden ser mayores que 100.");
+                        } else if (width < 0) {
+                            System.out.println("Las dimensiones deben ser positivas");
+                        }
+                    } while (width < 0 || width > 100);
+                    
+                    do {
+                        System.out.print("\nAlto: ");
+                        height = in.nextInt();
+                        
+                        if (height > 100) {
+                            System.out.println("Las dimensiones no pueden ser mayores que 100.");
+                        } else if (height < 0) {
+                            System.out.println("Las dimensiones deben ser positivas.");
+                        }
+                    } while (height < 0 || height > 100);
+                    
+                    do {
+                        System.out.print("Introduce el número de bichos iniciales (opcional): ");
+                        numberAlive = in.nextInt();
+                        
+                        if (numberAlive > ((width*height)-((int)(width*height*0.01)))) {
+                            System.out.println("El número es demasiado grande.");
+                        } else if (numberAlive < 1) {
+                            System.out.println("El número no puede ser menor que uno.");
+                        }
+                    } while (numberAlive > ((width*height)-((int)(width*height*0.01))));
                     break;
             }
         } while (option != 'S');
     }
-    
+
 }
