@@ -147,4 +147,11 @@ public class Simulation {
         checkBorn();
         checkDead();
     }
+    
+    //Ejecuta n generaciones introducidas por el usuario.
+    public void simulate(int generations) {
+        for (int i = 0; i < generations; i++) {
+            doCycle();
+        }
+    }
 }
