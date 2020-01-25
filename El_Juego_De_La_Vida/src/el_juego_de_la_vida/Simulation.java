@@ -60,8 +60,8 @@ public class Simulation {
 
             //Cuando se ha elegido un número de bichos vivas al inicio.
             for (int i = 0; i < aliveNumber; i++) {
-                for (int j = 0; j < height; j++) {
-                    for (int k = 0; k < width; k++) {
+                for (int j = 0; j < width; j++) {
+                    for (int k = 0; k < height; k++) {
                         matrix[(int) (Math.random() * height)][(int) (Math.random() * width)] = 1;
                     }
                 }
@@ -120,6 +120,9 @@ public class Simulation {
     
     
     public void checkBorn() {
- 
+        
+        for (int i = 0; i < width; i++) {
+            
+        }
     }
 }
