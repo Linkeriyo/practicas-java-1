@@ -36,7 +36,7 @@ public class Simulation {
     }
 
     protected int height = matrix.length, width = matrix[0].length;
-    
+
     //Genera el punto de inicio aleatoriamente.
     public void randomize() {
 
@@ -68,7 +68,7 @@ public class Simulation {
             }
         }
     }
-    
+
     //Cuenta las casillas vecinas en las que hay bichos.
     int countNearby(int x, int y) {
         int counter = 0;
@@ -97,32 +97,54 @@ public class Simulation {
             }
         }
 
-        if (x < width-1) {
-            if (matrix[x+1][y] == 1) {
+        if (x < width - 1) {
+            if (matrix[x + 1][y] == 1) {
                 counter++;
-            } 
-            
+            }
+
             if (y > 0) {
-                if (matrix[x+1][y-1] == 1) {
+                if (matrix[x + 1][y - 1] == 1) {
                     counter++;
                 }
             }
-            
-            if (y < height-1) {
-                if (matrix[x+1][y+1] == 1) {
+
+            if (y < height - 1) {
+                if (matrix[x + 1][y + 1] == 1) {
                     counter++;
                 }
             }
         }
-        
+
         return counter++;
     }
     
-    
-    public void checkBorn() {
-        
+    //Comprueba los bichos que tienen que nacer en toda la matriz.
+    void checkBorn() {
         for (int i = 0; i < width; i++) {
-            
+            for (int j = 0; j < height; j++) {
+                if (countNearby(i, j) >= 3) {
+                    matrix[i][j] = 1;
+                }
+            }
         }
+    }
+
+    //Comprueba los bichos que tienen que morir en toda la matriz.
+    void checkDead() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (matrix[i][j] == 1) {
+                    if (countNearby(i, j) <= 1) {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+        }
+    }
+    
+    //Ejecuta una generación.
+    void doCycle() {
+        checkBorn();
+        checkDead();
     }
 }
