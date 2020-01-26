@@ -19,12 +19,14 @@ public class Simulation {
     public Simulation() {
         matrix = new int[defX][defY];
         generateRandom = true;
+        aliveNumber = 0;
     }
 
     // Constructor para introducir las dimensiones x e y respectivamente.
     public Simulation(final int x, final int y) {
         matrix = new int[x][y];
         generateRandom = true;
+        aliveNumber = 0;
     }
 
     // Constructor para introdir las dimensiones x e y además del número de
@@ -38,17 +40,30 @@ public class Simulation {
     protected int height = matrix.length, width = matrix[0].length;
 
     public void print() {
-        // Primera línea.
-        for (int i = 0; i < width; i++) {
-            if (i == 0) {
-                System.out.print("+---+");
-            } else {
-                System.out.print("---+");
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (j == 0) {
+                    System.out.print("+---+");
+                } else {
+                    System.out.print("---+");
+                }
+            }
+            for (int j = 0; j < width; j++) {
+                System.out.print("| ");
+                if (matrix[i][j] == 0) {
+                    System.out.print(" ");
+                } else {
+                    System.out.print("X");
+                }
+                System.out.print(" ");
+            }
+            
+            if (i == height-1) {
+                System.out.println("---+");
             }
         }
-        for (int i = 0; i < width; i++) {
-            System.out.print();
-        }
+        
+        
     }
 
     // Genera el punto de inicio aleatoriamente.
@@ -167,5 +182,11 @@ public class Simulation {
         for (int i = 0; i < generations; i++) {
             doCycle();
         }
+    }
+    
+    public static void main(String[] args) {
+        Simulation sim = new Simulation();
+        
+        sim.print();
     }
 }
