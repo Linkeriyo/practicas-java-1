@@ -195,8 +195,11 @@ public class Simulation {
     }
     
     public static void main(String[] args) {
-        Simulation sim = new Simulation(20, 20, 5);
+        Simulation sim = new Simulation();
         sim.randomize();
+        sim.print();
+        System.out.println(sim.countNearby(0,0));
+        sim.doCycle();
         sim.print();
     }
 }
