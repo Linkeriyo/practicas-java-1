@@ -15,21 +15,21 @@ public class Simulation {
     protected int defX = 20, defY = 20, aliveNumber, matrix[][];
     protected boolean generateRandom;
 
-    //Constructor por defecto. 20x20
+    // Constructor por defecto. 20x20
     public Simulation() {
         matrix = new int[defX][defY];
         generateRandom = true;
     }
 
-    //Constructor para introducir las dimensiones x e y respectivamente.
-    public Simulation(int x, int y) {
+    // Constructor para introducir las dimensiones x e y respectivamente.
+    public Simulation(final int x, final int y) {
         matrix = new int[x][y];
         generateRandom = true;
     }
 
-    //Constructor para introdir las dimensiones x e y además del número de
-    //bichos vivos al empezar.
-    public Simulation(int x, int y, int aliveNumber) {
+    // Constructor para introdir las dimensiones x e y además del número de
+    // bichos vivos al empezar.
+    public Simulation(final int x, final int y, final int aliveNumber) {
         matrix = new int[x][y];
         generateRandom = false;
         this.aliveNumber = aliveNumber;
@@ -37,7 +37,21 @@ public class Simulation {
 
     protected int height = matrix.length, width = matrix[0].length;
 
-    //Genera el punto de inicio aleatoriamente.
+    public void print() {
+        // Primera línea.
+        for (int i = 0; i < width; i++) {
+            if (i == 0) {
+                System.out.print("+---+");
+            } else {
+                System.out.print("---+");
+            }
+        }
+        for (int i = 0; i < width; i++) {
+            System.out.print();
+        }
+    }
+
+    // Genera el punto de inicio aleatoriamente.
     public void randomize() {
 
         for (int i = 0; i < width; i++) {
@@ -48,7 +62,7 @@ public class Simulation {
 
         if (generateRandom) {
 
-            //Cuando no se elige un número de bichos al inicio.
+            // Cuando no se elige un número de bichos al inicio.
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     if ((int) (Math.random() * 2) == 0) {
@@ -58,7 +72,7 @@ public class Simulation {
             }
         } else {
 
-            //Cuando se ha elegido un número de bichos vivas al inicio.
+            // Cuando se ha elegido un número de bichos vivas al inicio.
             for (int i = 0; i < aliveNumber; i++) {
                 for (int j = 0; j < width; j++) {
                     for (int k = 0; k < height; k++) {
@@ -69,8 +83,8 @@ public class Simulation {
         }
     }
 
-    //Cuenta las casillas vecinas en las que hay bichos.
-    int countNearby(int x, int y) {
+    // Cuenta las casillas vecinas en las que hay bichos.
+    int countNearby(final int x, final int y) {
         int counter = 0;
 
         if (x > 0) {
@@ -117,8 +131,8 @@ public class Simulation {
 
         return counter++;
     }
-    
-    //Comprueba los bichos que tienen que nacer en toda la matriz.
+
+    // Comprueba los bichos que tienen que nacer en toda la matriz.
     void checkBorn() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -129,7 +143,7 @@ public class Simulation {
         }
     }
 
-    //Comprueba los bichos que tienen que morir en toda la matriz.
+    // Comprueba los bichos que tienen que morir en toda la matriz.
     void checkDead() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -141,15 +155,15 @@ public class Simulation {
             }
         }
     }
-    
-    //Ejecuta una generación.
+
+    // Ejecuta una generación.
     void doCycle() {
         checkBorn();
         checkDead();
     }
-    
-    //Ejecuta n generaciones introducidas por el usuario.
-    public void simulate(int generations) {
+
+    // Ejecuta n generaciones introducidas por el usuario.
+    public void simulate(final int generations) {
         for (int i = 0; i < generations; i++) {
             doCycle();
         }
