@@ -12,14 +12,16 @@ package el_juego_de_la_vida;
  */
 public class Simulation {
 
-    protected int defX = 20, defY = 20, aliveNumber, matrix[][];
+    protected int defX = 20, defY = 20, aliveNumber, matrix[][], height, width;
     protected boolean generateRandom;
-
+    
     // Constructor por defecto. 20x20
     public Simulation() {
         matrix = new int[defX][defY];
         generateRandom = true;
         aliveNumber = 0;
+        height = matrix.length;
+        width = matrix[0].length;
     }
 
     // Constructor para introducir las dimensiones x e y respectivamente.
@@ -27,6 +29,7 @@ public class Simulation {
         matrix = new int[x][y];
         generateRandom = true;
         aliveNumber = 0;
+        height = matrix.length;
     }
 
     // Constructor para introdir las dimensiones x e y además del número de
@@ -35,10 +38,11 @@ public class Simulation {
         matrix = new int[x][y];
         generateRandom = false;
         this.aliveNumber = aliveNumber;
+        height = matrix.length;
+        width = matrix[0].length;
     }
-
-    protected int height = matrix.length, width = matrix[0].length;
-
+    
+    // Imprime la matriz de la simulación.
     public void print() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -48,6 +52,8 @@ public class Simulation {
                     System.out.print("---+");
                 }
             }
+            System.out.println("");
+
             for (int j = 0; j < width; j++) {
                 System.out.print("| ");
                 if (matrix[i][j] == 0) {
@@ -55,15 +61,23 @@ public class Simulation {
                 } else {
                     System.out.print("X");
                 }
-                System.out.print(" ");
+                if (j == width - 1) {
+                    System.out.print(" |");
+                } else {
+                    System.out.print(" ");
+                }
+
             }
-            
-            if (i == height-1) {
-                System.out.println("---+");
+            System.out.println("");
+
+            if (i == height - 1) {
+                System.out.print("+---+");
+                for (int j = 1; j < width; j++) {
+                    System.out.print("---+");
+                }
             }
         }
-        
-        
+        System.out.println("");
     }
 
     // Genera el punto de inicio aleatoriamente.
