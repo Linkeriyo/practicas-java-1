@@ -103,11 +103,7 @@ public class Simulation {
 
             // Cuando se ha elegido un número de bichos vivas al inicio.
             for (int i = 0; i < aliveNumber; i++) {
-                for (int j = 0; j < width; j++) {
-                    for (int k = 0; k < height; k++) {
-                        matrix[(int) (Math.random() * height)][(int) (Math.random() * width)] = 1;
-                    }
-                }
+                matrix[(int) (Math.random() * height)][(int) (Math.random() * width)] = 1;
             }
         }
     }
@@ -199,8 +195,8 @@ public class Simulation {
     }
     
     public static void main(String[] args) {
-        Simulation sim = new Simulation();
-        
+        Simulation sim = new Simulation(20, 20, 5);
+        sim.randomize();
         sim.print();
     }
 }
