@@ -212,12 +212,14 @@ public class Simulation {
     // Ejecuta una generación.
     void doCycle() {
         
+        //Copia matrix a oldMatrix.
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 oldMatrix[i][j] = matrix[i][j];
             }
         }
         
+        //Llama a los métodos anteriores por casilla.
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (oldMatrix[i][j] == 0) {
