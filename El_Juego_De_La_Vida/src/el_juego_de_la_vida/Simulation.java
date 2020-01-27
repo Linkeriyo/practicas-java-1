@@ -56,7 +56,7 @@ public class Simulation {
 
             for (int j = 0; j < width; j++) {
                 System.out.print("| ");
-                if (matrix[i][j] == 0) {
+                if (matrix[j][i] == 0) {
                     System.out.print(" ");
                 } else {
                     System.out.print("X");
@@ -79,6 +79,40 @@ public class Simulation {
         }
         System.out.println("");
     }
+    
+    public void printPositions() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (j == 0) {
+                    System.out.print("+----+");
+                } else {
+                    System.out.print("----+");
+                }
+            }
+            System.out.println("");
+
+            for (int j = 0; j < width; j++) {
+                System.out.print("| ");
+                System.out.print(j);
+                System.out.print(i);
+                if (j == width - 1) {
+                    System.out.print(" |");
+                } else {
+                    System.out.print(" ");
+                }
+
+            }
+            System.out.println("");
+
+            if (i == height - 1) {
+                System.out.print("+----+");
+                for (int j = 1; j < width; j++) {
+                    System.out.print("----+");
+                }
+            }
+        }
+        System.out.println("");
+    }
 
     // Genera el punto de inicio aleatoriamente.
     public void randomize() {
@@ -94,7 +128,7 @@ public class Simulation {
             // Cuando no se elige un número de bichos al inicio.
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    if ((int) (Math.random() * 2) == 0) {
+                    if ((int) (Math.random() * 10) == 0) {
                         matrix[i][j] = 1;
                     }
                 }
@@ -195,11 +229,16 @@ public class Simulation {
     }
     
     public static void main(String[] args) {
+        
         Simulation sim = new Simulation();
+//        sim.printPositions();
         sim.randomize();
-        sim.print();
-        System.out.println(sim.countNearby(0,0));
-        sim.doCycle();
-        sim.print();
+        for (int i = 0; i < 10; i++) {
+            sim.print();
+            System.out.println(sim.countNearby(1, 1));
+            sim.doCycle();
+        }
+        
+        
     }
 }
