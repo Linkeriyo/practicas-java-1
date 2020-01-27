@@ -188,7 +188,7 @@ public class Simulation {
             }
         }
 
-        return counter++;
+        return counter;
     }
 
     // Comprueba los bichos que tienen que nacer en toda la matriz.
