@@ -11,13 +11,14 @@ package el_juego_de_la_vida;
  * @author linkeriyo
  */
 public class Simulation {
-
-    protected int defX = 20, defY = 20, aliveNumber, matrix[][], height, width;
+    protected final int defX = 20, defY = 20;
+    protected int aliveNumber, oldMatrix[][], matrix[][], height, width;
     protected boolean generateRandom;
     
     // Constructor por defecto. 20x20
     public Simulation() {
         matrix = new int[defX][defY];
+        oldMatrix = new int[defX][defX];
         generateRandom = true;
         aliveNumber = 0;
         height = matrix.length;
@@ -27,6 +28,7 @@ public class Simulation {
     // Constructor para introducir las dimensiones x e y respectivamente.
     public Simulation(final int x, final int y) {
         matrix = new int[x][y];
+        oldMatrix = new int[x][y];
         generateRandom = true;
         aliveNumber = 0;
         height = matrix.length;
@@ -36,6 +38,7 @@ public class Simulation {
     // bichos vivos al empezar.
     public Simulation(final int x, final int y, final int aliveNumber) {
         matrix = new int[x][y];
+        oldMatrix = new int[x][y];
         generateRandom = false;
         this.aliveNumber = aliveNumber;
         height = matrix.length;
@@ -80,7 +83,8 @@ public class Simulation {
         System.out.println("");
     }
     
-    public void printPositions() {
+    // Imprime las posiciones de la matriz.
+    void printPositions() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (j == 0) {
@@ -128,7 +132,7 @@ public class Simulation {
             // Cuando no se elige un número de bichos al inicio.
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    if ((int) (Math.random() * 10) == 0) {
+                    if ((int) (Math.random() * 6) == 0) {
                         matrix[i][j] = 1;
                     }
                 }
@@ -147,42 +151,42 @@ public class Simulation {
         int counter = 0;
 
         if (x > 0) {
-            if (matrix[x - 1][y] == 1) {
+            if (oldMatrix[x - 1][y] == 1) {
                 counter++;
             }
 
             if (y > 0) {
-                if (matrix[x - 1][y - 1] == 1) {
+                if (oldMatrix[x - 1][y - 1] == 1) {
                     counter++;
                 }
-                if (matrix[x][y - 1] == 1) {
+                if (oldMatrix[x][y - 1] == 1) {
                     counter++;
                 }
             }
 
             if (y < height - 1) {
-                if (matrix[x - 1][y + 1] == 1) {
+                if (oldMatrix[x - 1][y + 1] == 1) {
                     counter++;
                 }
-                if (matrix[x][y + 1] == 1) {
+                if (oldMatrix[x][y + 1] == 1) {
                     counter++;
                 }
             }
         }
 
         if (x < width - 1) {
-            if (matrix[x + 1][y] == 1) {
+            if (oldMatrix[x + 1][y] == 1) {
                 counter++;
             }
 
             if (y > 0) {
-                if (matrix[x + 1][y - 1] == 1) {
+                if (oldMatrix[x + 1][y - 1] == 1) {
                     counter++;
                 }
             }
 
             if (y < height - 1) {
-                if (matrix[x + 1][y + 1] == 1) {
+                if (oldMatrix[x + 1][y + 1] == 1) {
                     counter++;
                 }
             }
@@ -193,29 +197,36 @@ public class Simulation {
 
     // Comprueba los bichos que tienen que nacer en toda la matriz.
     void checkBorn(int x, int y) {
-        if (countNearby(x, y) >= 3) {
+        if (countNearby(x, y) == 3) {
             matrix[x][y] = 1;
         }
     }
 
     // Comprueba los bichos que tienen que morir en una casilla
     void checkDead(int x, int y) {
-        if (countNearby(x, y) <= 2) {
+        if (countNearby(x, y) != 2 && countNearby(x, y) != 3) {
             matrix[x][y] = 0;
         }
     }
 
     // Ejecuta una generación.
     void doCycle() {
+        
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (matrix[i][j] == 0) {
+                oldMatrix[i][j] = matrix[i][j];
+            }
+        }
+        
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (oldMatrix[i][j] == 0) {
                     checkBorn(i, j);
                 }
-                if (matrix[i][j] == 1) {
+                if (oldMatrix[i][j] == 1) {
                     checkDead(i, j);
                 }
-            }
+            }   
         }
     }
 
