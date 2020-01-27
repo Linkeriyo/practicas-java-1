@@ -192,33 +192,31 @@ public class Simulation {
     }
 
     // Comprueba los bichos que tienen que nacer en toda la matriz.
-    void checkBorn() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (countNearby(i, j) >= 3) {
-                    matrix[i][j] = 1;
-                }
-            }
+    void checkBorn(int x, int y) {
+        if (countNearby(x, y) >= 3) {
+            matrix[x][y] = 1;
         }
     }
 
-    // Comprueba los bichos que tienen que morir en toda la matriz.
-    void checkDead() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (matrix[i][j] == 1) {
-                    if (countNearby(i, j) <= 1) {
-                        matrix[i][j] = 0;
-                    }
-                }
-            }
+    // Comprueba los bichos que tienen que morir en una casilla
+    void checkDead(int x, int y) {
+        if (countNearby(x, y) <= 2) {
+            matrix[x][y] = 0;
         }
     }
 
     // Ejecuta una generación.
     void doCycle() {
-        checkBorn();
-        checkDead();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (matrix[i][j] == 0) {
+                    checkBorn(i, j);
+                }
+                if (matrix[i][j] == 1) {
+                    checkDead(i, j);
+                }
+            }
+        }
     }
 
     // Ejecuta n generaciones introducidas por el usuario.
