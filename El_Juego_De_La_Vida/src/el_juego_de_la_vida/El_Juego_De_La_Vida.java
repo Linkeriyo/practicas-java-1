@@ -95,15 +95,16 @@ public class El_Juego_De_La_Vida {
                         sim = new Simulation();
                     } else if (width != 0 && height != 0) {
                         sim = new Simulation(width, height);
-                    } else if (numberAlive != 0) {
+                    } else {
                         sim = new Simulation(width, height, numberAlive);
                     }
-                    
+
                     do {
                         sim.print();
                         System.out.print("Introduce el número de generaciones: ");
                         sim.simulate(in.nextInt());
                     }
+
                     break;
             }
 

@@ -34,7 +34,7 @@ public class Simulation {
         height = matrix.length;
     }
 
-    // Constructor para introdir las dimensiones x e y además del número de
+    // Constructor para introducir las dimensiones x e y además del número de
     // bichos vivos al empezar.
     public Simulation(final int x, final int y, final int aliveNumber) {
         matrix = new int[x][y];
