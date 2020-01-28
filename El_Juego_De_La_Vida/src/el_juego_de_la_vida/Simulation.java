@@ -23,6 +23,7 @@ public class Simulation {
         aliveNumber = 0;
         height = matrix.length;
         width = matrix[0].length;
+        randomize();
     }
 
     // Constructor para introducir las dimensiones x e y respectivamente.
@@ -32,6 +33,7 @@ public class Simulation {
         generateRandom = true;
         aliveNumber = 0;
         height = matrix.length;
+        randomize();
     }
 
     // Constructor para introducir las dimensiones x e y además del número de
@@ -43,6 +45,7 @@ public class Simulation {
         this.aliveNumber = aliveNumber;
         height = matrix.length;
         width = matrix[0].length;
+        randomize();
     }
     
     // Imprime la matriz de la simulación.
@@ -119,7 +122,7 @@ public class Simulation {
     }
 
     // Genera el punto de inicio aleatoriamente.
-    public void randomize() {
+    void randomize() {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {

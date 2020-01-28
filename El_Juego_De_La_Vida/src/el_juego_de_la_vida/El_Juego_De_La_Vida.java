@@ -5,7 +5,9 @@
  */
 package el_juego_de_la_vida;
 
+import static java.lang.Integer.parseInt;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -53,14 +55,12 @@ public class El_Juego_De_La_Vida {
                     break;
                 default:
                     System.out.println("Introduce las dimensiones (si es 0 se asignará 20 por defecto):");
-                    int width,
-                     height,
-                     numberAlive;
+                    int width, height, numberAlive;
                     Simulation sim;
 
                     do {
                         System.out.print("Ancho: ");
-                        width = in.nextInt();
+                        width = parseInt(in.next());
 
                         if (width > 100) {
                             System.out.println("Las dimensiones no pueden ser mayores que 100.");
@@ -71,7 +71,7 @@ public class El_Juego_De_La_Vida {
 
                     do {
                         System.out.print("\nAlto: ");
-                        height = in.nextInt();
+                        height = parseInt(in.next());
 
                         if (height > 100) {
                             System.out.println("Las dimensiones no pueden ser mayores que 100.");
@@ -81,8 +81,8 @@ public class El_Juego_De_La_Vida {
                     } while (height < 0 || height > 100);
 
                     do {
-                        System.out.print("Introduce el número de bichos iniciales (0 para aleatorio): ");
-                        numberAlive = in.nextInt();
+                        System.out.print("\nIntroduce el número de bichos iniciales (0 para aleatorio): ");
+                        numberAlive = parseInt(in.next());
 
                         if (numberAlive > ((width * height) - ((int) (width * height * 0.01)))) {
                             System.out.println("El número es demasiado grande.");
@@ -93,7 +93,7 @@ public class El_Juego_De_La_Vida {
 
                     if (width == 0 && height == 0 && numberAlive == 0) {
                         sim = new Simulation();
-                    } else if (width != 0 && height != 0) {
+                    } else if (width != 0 && height != 0 && numberAlive == 0) {
                         sim = new Simulation(width, height);
                     } else {
                         sim = new Simulation(width, height, numberAlive);
@@ -101,9 +101,14 @@ public class El_Juego_De_La_Vida {
 
                     do {
                         sim.print();
-                        System.out.print("Introduce el número de generaciones: ");
-                        sim.simulate(in.nextInt());
-                    }
+                        System.out.print("Introduce el número de generaciones o \"S\" para salir: ");
+                        input = in.next();
+                        if (Pattern.matches("[0-9]", input)){
+                            sim.simulate(parseInt(input));
+                        } else if (!Pattern.matches("[Ss]", input)){
+                            System.out.println("Entrada no válida.");
+                        }
+                    } while (!Pattern.matches("[Ss]", input));
 
                     break;
             }
