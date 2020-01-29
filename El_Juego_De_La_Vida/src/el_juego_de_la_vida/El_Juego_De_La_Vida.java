@@ -89,13 +89,13 @@ public class El_Juego_De_La_Vida {
                         System.out.print("\nIntroduce el número de bichos iniciales (0 para aleatorio): ");
                         numberAlive = parseInt(in.next());
                         
-                        if (width < 0) {
+                        if (width > 0) {
                             tWidth = width; // Asignación a variables temporales si width/height son 0.
                         } else {
                             tWidth = 20;
                         }
                         
-                        if (height < 0) {
+                        if (height > 0) {
                             tHeight = height;
                         } else {
                             tHeight = 20;
@@ -103,7 +103,7 @@ public class El_Juego_De_La_Vida {
                         
                         if (numberAlive > (tWidth * tHeight)) {
                             System.out.println("El número es demasiado grande.");
-                        } else if (numberAlive < 1) {
+                        } else if (numberAlive < 0) {
                             System.out.println("El número debe ser positivo.");
                         }
                     } while (numberAlive > (tWidth * tHeight));
@@ -112,6 +112,8 @@ public class El_Juego_De_La_Vida {
                         sim = new Simulation();
                     } else if (width != 0 && height != 0 && numberAlive == 0) {
                         sim = new Simulation(width, height);
+                    } else if (width == 0 && height == 0 && numberAlive != 0) {
+                        sim = new Simulation(numberAlive);
                     } else {
                         sim = new Simulation(width, height, numberAlive);
                     }
@@ -126,6 +128,7 @@ public class El_Juego_De_La_Vida {
                             System.out.println("Entrada no válida.");
                         }
                     } while (!Pattern.matches("[Ss]", input));
+                    System.out.println("");
 
                     break;
             }

@@ -33,6 +33,7 @@ public class Simulation {
         generateRandom = true;
         aliveNumber = 0;
         height = matrix.length;
+        width = matrix[0].length;
         randomize();
     }
 
@@ -41,6 +42,16 @@ public class Simulation {
     public Simulation(final int x, final int y, final int aliveNumber) {
         matrix = new int[x][y];
         oldMatrix = new int[x][y];
+        generateRandom = false;
+        this.aliveNumber = aliveNumber;
+        height = matrix.length;
+        width = matrix[0].length;
+        randomize();
+    }
+    
+    public Simulation (final int aliveNumber) {
+        matrix = new int[defX][defY];
+        oldMatrix = new int[defX][defX];
         generateRandom = false;
         this.aliveNumber = aliveNumber;
         height = matrix.length;
