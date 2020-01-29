@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package juego_de_juegos;
-import el_juego_de_la_vida.*;
-import conecta4.*;
-import luces_fuera.*;
-import ahorcado.*;
 
 /**
  *

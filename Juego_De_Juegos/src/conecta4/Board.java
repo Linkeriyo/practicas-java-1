@@ -214,5 +214,10 @@ class Board {
         
         return 0;
     }
+    
+    public static void main(String[] args) {
+        Board board = new Board();
+        board.print();
+    }
 }
 
