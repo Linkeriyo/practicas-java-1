@@ -61,28 +61,42 @@ public class El_Juego_De_La_Vida {
                      height,
                      numberAlive;
                     Simulation sim;
+                    boolean nice = false;
 
                     do {
                         System.out.print("Ancho: ");
-                        width = parseInt(in.next());
-
+                        input = in.next();
+                        if (Pattern.matches("[0-9]+", input)) {
+                            width = parseInt(input);
+                            nice = true;
+                        } else {
+                            width = 0;
+                        }
+                        
                         if (width > 100) {
                             System.out.println("Las dimensiones no pueden ser mayores que 100.");
                         } else if (width < 0) {
                             System.out.println("Las dimensiones deben ser positivas");
                         }
-                    } while (width < 0 || width > 100);
-
+                    } while ((width < 0 || width > 100) && nice == false);
+                    nice = false;
+                    
                     do {
                         System.out.print("\nAlto: ");
-                        height = parseInt(in.next());
+                        input = in.next();
+                        if (Pattern.matches("[0-9]+", input)) {
+                            height = parseInt(input);
+                            nice = true;
+                        } else {
+                            height = 0;
+                        }
 
                         if (height > 100) {
                             System.out.println("Las dimensiones no pueden ser mayores que 100.");
                         } else if (height < 0) {
                             System.out.println("Las dimensiones deben ser positivas.");
                         }
-                    } while (height < 0 || height > 100);
+                    } while ((height < 0 || height > 100) && nice == false);
                     
                     int tWidth, tHeight;
                     do {

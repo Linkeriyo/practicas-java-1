@@ -133,7 +133,7 @@ public class Simulation {
     }
 
     // Genera el punto de inicio aleatoriamente.
-    void randomize() {
+    final void randomize() {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
