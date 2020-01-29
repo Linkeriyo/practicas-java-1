@@ -252,18 +252,4 @@ public class Simulation {
             doCycle();
         }
     }
-    
-    public static void main(String[] args) {
-        
-        Simulation sim = new Simulation();
-//        sim.printPositions();
-        sim.randomize();
-        for (int i = 0; i < 10; i++) {
-            sim.print();
-            System.out.println(sim.countNearby(1, 1));
-            sim.doCycle();
-        }
-        
-        
-    }
 }
