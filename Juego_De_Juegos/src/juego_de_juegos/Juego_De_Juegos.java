@@ -32,6 +32,15 @@ public class Juego_De_Juegos {
 "      $$ |  $$ |$$ |  $$ |$$ |      $$ |  $$ |$$ |  $$ |$$\\   $$ |          \n" +
 "      \\$$$$$$  |\\$$$$$$  |$$$$$$$$\\ \\$$$$$$  | $$$$$$  |\\$$$$$$  |          \n" +
 "       \\______/  \\______/ \\________| \\______/  \\______/  \\______/ ");
+            System.out.println("\nReproducir esto en bucle para mayor inmersión: https://youtu.be/xukF4MPaf1k \n\n"
+                    + "Elige un juego:\n"
+                    + "[1] Tres en raya clásico.\n"
+                    + "[2] Tres en raya en movimiento.\n"
+                    + "[3] Conecta 4.\n"
+                    + "[4] Ahorcado.\n"
+                    + "[5] Luces Fuera.\n"
+                    + "[6] El juego de la vida.\n"
+                    + "[S] Salir");
             
             input = in.next();
             do {
@@ -67,7 +76,7 @@ public class Juego_De_Juegos {
                     break;
             }
             
-        } while (input.charAt(0) != 'S');
+        } while (input.toUpperCase().charAt(0) != 'S');
     }
     
 }
