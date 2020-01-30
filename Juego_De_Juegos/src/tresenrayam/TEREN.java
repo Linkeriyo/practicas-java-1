@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tres_En_Raya_Clasico;
+package tresenrayam;
 import java.util.Scanner;
 
 /**
  *
  * @author linke
  */
-public class TERC {  
+public class TEREN {  
     /*
         Los métodos TERC.selectboxY y TERC.selectboxX leen una cadena de formato
         [A-C][1-3] validada anteriormente y asigna valores de 0 a 2 para
@@ -52,30 +52,53 @@ public class TERC {
         return x;
     }
     
+    
     public static void doubles() {
         Board board = new Board();
         Scanner in = new Scanner(System.in);
         Player p1 = new Player(1);
         Player p2 = new Player(2);
+        int turnNumber=1;
         
         board.print();
-
+        
         while (board.winner() == 0) {
-            if (board.winner() == 0) {
-                //Empieza el turno de X.
-                p1.turn(board.board);
+            if (turnNumber < 4) {
+                if (board.winner() == 0) {
+                    //Empieza el turno de X.
+                    p1.classicTurn(board.board);
 
-                //Se imprime el tablero.
-                board.print();
+                    //Se imprime el tablero.
+                    board.print();
+                }
+
+                if (board.winner() == 0) {
+                    //Empieza el turno de O.
+                    p2.classicTurn(board.board);
+                    turnNumber++;
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
+            } else {
+                if (board.winner() == 0) {
+                    //Empieza el turno de X.
+                    p1.moveTurn(board.board);
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
+
+                if (board.winner() == 0) {
+                    //Empieza el turno de O.
+                    p2.moveTurn(board.board);
+                    turnNumber++;
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
             }
-            
-            if (board.winner() == 0) {
-                //Empieza el turno de O.
-                p2.turn(board.board);
-                
-                //Se imprime el tablero.
-                board.print();
-            }
+
         
             switch (board.winner()) {
                 case 1:
@@ -124,23 +147,22 @@ public class TERC {
     public static void ia() {
         Board board = new Board();
         Player p1 = new Player(1);
+        Player ia = new Player(2);
         Scanner in = new Scanner(System.in);
+        int turnNumber = 1;
         
         board.print();
 
         while (board.winner() == 0) {
-            if (board.winner() == 0) {
-                //Empieza el turno de X.
-                p1.turn(board.board);
+            if (turnNumber < 4) {
+                if (board.winner() == 0) {
+                    //Empieza el turno de X.
+                    p1.classicTurn(board.board);
 
-                //Se imprime el tablero.
-                board.print();
-            }
-            
-            if (board.winner() == 0) {
-                //Empieza el turno de O.
-
-                //Si el jugador no está a punto de ganar...
+                    //Se imprime el tablero.
+                    board.print();
+                }
+                
                 if (board.aboutToWin() == 20) {
                     //Se pone una O en un lugar aleatorio.
                     int x, y;
@@ -214,10 +236,26 @@ public class TERC {
                             break;
                     }
                 }
-
                 //Se imprime el tablero.
                 board.print();
+            } else {
+                if (board.winner() == 0) {
+                    //Empieza el turno de X.
+                    p1.moveTurn(board.board);
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
+                if (board.winner() == 0) {
+                    //Empieza el turno de O.
+                    ia.randomMoveTurn(board.board);
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
             }
+            
+            turnNumber++;
 
             switch (board.winner()) {
                 case 1:
@@ -265,33 +303,57 @@ public class TERC {
 
     public static void random() {
         Board board = new Board();
-        Scanner in = new Scanner(System.in);
         Player p1 = new Player(1);
+        Player ia = new Player(2);
+        Scanner in = new Scanner(System.in);
+        int turnNumber = 1;
+        
         board.print();
 
         while (board.winner() == 0) {
-            if (board.winner() == 0) {
-                //Empieza el turno de X.
-                p1.turn(board.board);
+            if (turnNumber < 4) {
+                if (board.winner() == 0) {
+                    //Empieza el turno de X.
+                    p1.classicTurn(board.board);
 
+                    //Se imprime el tablero.
+                    board.print();
+                }
+                
+                if (board.winner() == 0) {
+                    //Empieza el turno de O.
+
+                    //Se pone una O en un lugar aleatorio.
+                    int x, y;
+                    do {
+                        x = (int)(Math.random()*3);
+                        y = (int)(Math.random()*3);
+                    } while (board.board[y][x] != 0);
+                    board.board[y][x] = 2;
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
                 //Se imprime el tablero.
                 board.print();
+            } else {
+                if (board.winner() == 0) {
+                    //Empieza el turno de X.
+                    p1.moveTurn(board.board);
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
+                if (board.winner() == 0) {
+                    //Empieza el turno de O.
+                    ia.randomMoveTurn(board.board);
+
+                    //Se imprime el tablero.
+                    board.print();
+                }
             }
             
-            if (board.winner() == 0) {
-                //Empieza el turno de O.
-
-                //Se pone una O en un lugar aleatorio.
-                int x, y;
-                do {
-                    x = (int)(Math.random()*3);
-                    y = (int)(Math.random()*3);
-                } while (board.board[y][x] != 0);
-                board.board[y][x] = 2;
-                
-                //Se imprime el tablero.
-                board.print();
-            }
+            turnNumber++;
 
             switch (board.winner()) {
                 case 1:
@@ -317,6 +379,7 @@ public class TERC {
                             " \\______/        \\______/ \\__|  \\__|\\__|  \\__|\\__|  \\__|\n" +
                             "                                                        ");
                     System.out.println("\nIntroduce un caracter para continuar.\n");
+                    in.next();
                     break;
                 case 3:
                     System.out.println("$$$$$$$$\\ $$\\      $$\\ $$$$$$$\\   $$$$$$\\ $$$$$$$$\\ $$$$$$$$\\ \n" +
@@ -352,6 +415,10 @@ public class TERC {
         System.out.println("\nPara elegir la casilla en la que quieres escribir, introduce");
         System.out.println("la letra de la fila (A-C) seguida del número de la columna (1-3),");
         System.out.println("por ejemplo \"A1\"");
+        System.out.println("A partir del 4º turno no podrás añadir más fichas al tablero,");
+        System.out.println("tendrás que mover las que ya tienes en el tablero. Para ello");
+        System.out.println("selecciona primero la ficha (de tu propiedad) que quieres mover y");
+        System.out.println("muévela con W, A, S o D.");
         System.out.println("\n-- Modo a dobles (uno contra uno) --");
         System.out.println("En este modo podrás jugar contra un amigo de forma local.");
         System.out.println("Las casillas se introducen por turnos.");

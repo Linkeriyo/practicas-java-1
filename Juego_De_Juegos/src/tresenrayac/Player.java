@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tres_En_Raya_Clasico;
+package tresenrayac;
 
-import static Tres_En_Raya_Clasico.TERC.selectBoxX;
-import static Tres_En_Raya_Clasico.TERC.selectBoxY;
+import static tresenrayac.TERC.selectBoxX;
+import static tresenrayac.TERC.selectBoxY;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 

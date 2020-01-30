@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class main {
 
-    public static void main(String[] args) {
+    public static void main() {
         char option;
         boolean nice = false;
         Scanner in = new Scanner(System.in);
