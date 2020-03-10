@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tres_En_Raya_Clasico;
+package tresenrayam;
 
 
 public class Board {
@@ -416,5 +416,31 @@ public class Board {
         }
         
         return cases;
+    }
+    
+    public boolean surrounded(int y, int x) {
+        boolean is = true;
+        
+        //Si Y es 0 o 1, comprueba debajo.
+        if (y < 2 && board[y+1][x] == 0) {
+            is = false;
+        }
+        
+        //Si Y es 1 o 2, comprueba encima.
+        if (y > 0 && board[y-1][x] == 0) {
+            is = false;
+        }
+        
+        //Si X es 0 o 1, comprueba debajo.
+        if (x < 2 && board[y][x+1] == 0) {
+            is = false;
+        }
+        
+        //Si Y es 1 o 2, comprueba encima.
+        if (x > 0 && board[y][x-1] == 0) {
+            is = false;
+        }
+        
+        return is;
     }
 }

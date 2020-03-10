@@ -18,7 +18,7 @@ public class El_Juego_De_La_Vida {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main() {
         Scanner in = new Scanner(System.in);
 
         char option;

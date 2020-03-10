@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tres_En_Raya_Clasico;
+package tresenrayac;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class main {
 
-    public static void main(String[] args) {
+    public static void main() {
         char option;
         boolean nice = false;
         Scanner in = new Scanner(System.in);
